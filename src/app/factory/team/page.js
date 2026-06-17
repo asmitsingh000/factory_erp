@@ -1,5 +1,6 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import React, { useState } from 'react';
 
 // ─── MOCK DATA (Backend API endpoints se replace hoga) ──────────────────────
@@ -18,6 +19,7 @@ const AUDIT_LOGS = [
 export default function TeamManagementPage() {
   const [team, setTeam] = useState(INITIAL_TEAM);
   const [logs] = useState(AUDIT_LOGS);
+  const[search] =useSearchParams(AUDIT_LOGS);
 
   // Access revoke karne ka handler
   const handleRevoke = (id) => {
@@ -27,7 +29,7 @@ export default function TeamManagementPage() {
   };
 
   return (
-    <div className="min-h-full flex flex-col space-y-6">
+    <div className="min-h-full flex flex-col space-y-6 p-3">
       
       {/* Page Header (Cleaned: Button is now handled beautifully by Navbar) */}
       <div className="pb-4 border-b border-gray-800">

@@ -1,8 +1,14 @@
 import { NextResponse } from 'next/server';
 
 const roleRoutes = {
-  factory: ['/factory/dashboard', '/factory/team', '/factory/calender', '/factory/calendar'],
-  marketing: ['/marketing/dashboard', '/marketing/team', '/marketing/calender', '/marketing/calendar'],
+  factory: [
+    '/local/factory/dashboard', '/local/factory/team', '/local/factory/calender', '/local/factory/calendar',
+    '/overseas/factory/dashboard', '/overseas/factory/team', '/overseas/factory/calender', '/overseas/factory/calendar'
+  ],
+  marketing: [
+    '/local/marketing/dashboard', '/local/marketing/team', '/local/marketing/calender', '/local/marketing/calendar',
+    '/overseas/marketing/dashboard', '/overseas/marketing/team', '/overseas/marketing/calender', '/overseas/marketing/calendar'
+  ],
   owner: ['/owner/monitor']
 };
 
@@ -68,6 +74,10 @@ export async function middleware(request) {
       const defaultRoutes = {
         factory: '/factory/dashboard',
         marketing: '/marketing/dashboard',
+        local_factory: '/local/factory/dashboard',
+        local_marketing: '/local/marketing/dashboard',
+        overseas_factory: '/overseas/factory/dashboard',
+        overseas_marketing: '/overseas/marketing/dashboard',
         owner: '/owner/monitor'
       };
       return NextResponse.redirect(new URL(defaultRoutes[userRole] || '/', request.url));

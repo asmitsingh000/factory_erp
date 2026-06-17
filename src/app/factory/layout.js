@@ -1,4 +1,4 @@
-import Navbar from "../components/navbar";
+import Navbar from "./components/navbar";
 import Footer from "../components/footer";
 
 export default function FactoryLayout({ children }) {
@@ -8,7 +8,7 @@ export default function FactoryLayout({ children }) {
       
       {/* 1. Fixed Navbar */}
       <div className="shrink-0 z-50">
-        <Navbar role="factory" />
+        <Navbar  />
       </div>
 
       {/* 2. Main Workspace (Takes only the remaining height) */}

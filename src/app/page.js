@@ -30,14 +30,23 @@ export default function LoginPage() {
         detectedRole = 'marketing';
       } else if (emailLower.includes('owner')) {
         detectedRole = 'owner';
-      } else {
+      } else if(emailLower.includes('factlocal')){
+        detectedRole = 'local_factory';
+      }else if(emailLower.includes('marketlocal')){
+        detectedRole = 'local_marketing';
+      }else if(emailLower.includes('factoverseas')){
+        detectedRole = 'overseas_factory';
+      }else if(emailLower.includes('marketoversea')){
+        detectedRole = 'overseas_marketing';
+      }
+       else {
         setLoading(false);
         setError('Testing Tip: Email mein "factory", "marketing" ya "owner" likho (e.g., test@factory.com)');
         return;
       }
 
-      document.cookie = `token=fake-jwt-token-for-testing; path=/; max-age=3600`;
-      document.cookie = `userRole=${detectedRole}; path=/; max-age=3600`;
+      document.cookie = `token=fake-jwt-token-for-testing; path=/; max-age=5600`;
+      document.cookie = `userRole=${detectedRole}; path=/; max-age=5600`;
 
       if (returnUrl) {
         router.push(returnUrl);
@@ -45,19 +54,23 @@ export default function LoginPage() {
         const defaultRoutes = {
           factory: '/factory/dashboard',
           marketing: '/marketing/dashboard',
+          local_factory: '/local/factory/dashboard',
+          local_marketing: '/local/marketing/dashboard',
+          overseas_factory: '/overseas/factory/dashboard',
+          overseas_marketing: '/overseas/marketing/dashboard',
           owner: '/owner/monitor'
         };
         router.push(defaultRoutes[detectedRole]);
       }
-      
+
       setLoading(false);
-    }, );
+    }, 1000);
   };
 
   return (
     <div className="min-h-screen bg-[#060913] flex items-center justify-center px-4 select-none">
       <div className="w-full max-w-md bg-[#0b0f19] border border-gray-800 rounded-xl p-8 shadow-2xl">
-        
+
         <div className="flex flex-col items-center mb-8">
           <div className="w-20 h-20 rounded-full overflow-hidden border border-gray-700 flex items-center justify-center bg-white cursor-pointer ">
             <img src="/lotus.png" alt="Lotus Logo" className="object-contain p-1 w-full h-full" />
@@ -73,7 +86,7 @@ export default function LoginPage() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          
+
           <div>
             <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
               Email Address

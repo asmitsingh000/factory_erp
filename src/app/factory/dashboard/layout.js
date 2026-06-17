@@ -1,8 +1,11 @@
+// this is the parent layout for the sub-routes of the FurniturePage
+
 'use client';
 
 import React, { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
+// import FurniturePage from './workplace/furniture/page'
 
 const MONTHS_LIST = [
   'January', 'February', 'March', 'April', 'May', 'June', 
@@ -36,7 +39,7 @@ function DashboardLayoutContent({ children }) {
     
     switch (currentSegment) {
       case 'summary':   return 'Summary Metrics';
-      case 'workplace': return 'Daily Production';
+      case "workplace": return 'Daily Production';
       case 'balance':   return 'Ledger Balance';
       case 'stocks':    return 'Stock Inventories';
       default:          return 'Daily Production';
@@ -46,7 +49,6 @@ function DashboardLayoutContent({ children }) {
   const [isWorkingOpen, setIsWorkingOpen] = useState(true);
   const [isRecordsOpen, setIsRecordsOpen] = useState(true);
   const [isPreviousOpen, setIsPreviousOpen] = useState(false);
-  
   const [yearSearchQuery, setYearSearchQuery] = useState('');
   const [selectedArchivedYear, setSelectedArchivedYear] = useState(null);
 
@@ -65,7 +67,7 @@ function DashboardLayoutContent({ children }) {
   };
 
   if (!mounted) {
-    return <div className="h-full bg-[#060913] flex items-center justify-center text-gray-500 text-xs">Calibrating system parameters...</div>;
+    return <div className="h-full bg-[#060913] flex items-center justify-center text-gray-500 text-xs">Loading system parameters...</div>;
   }
 
   return (
@@ -74,7 +76,7 @@ function DashboardLayoutContent({ children }) {
       
       {/* Mobile Top Bar */}
       <div className="md:hidden flex items-center justify-between p-4 bg-[#0b0f19] border-b border-gray-800 shrink-0 z-50">
-        <span className="font-bold text-sm text-indigo-400">🏭 Factory Dashboard</span>
+        <span className="font-bold text-sm text-white-400"> Factory Dashboard</span>
         <select 
           value={`${currentActiveMonth}-${currentActiveYear}-${workType}`}
           onChange={(e) => {
@@ -105,7 +107,7 @@ function DashboardLayoutContent({ children }) {
                 href={`${targetPath}?month=${currentActiveMonth}&year=${currentActiveYear}&type=${workType}`}
                 className={`w-full flex items-center px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
                   isActive 
-                    ? 'bg-indigo-600/10 text-indigo-400 border border-indigo-500/30 shadow-sm' 
+                    ? 'bg-indigo-600/10 text-white-400 border border-indigo-500/30 shadow-sm text-l' 
                     : 'text-gray-400 hover:bg-gray-800/40 hover:text-gray-200'
                 }`}
               >
